@@ -2,8 +2,8 @@ package org.korecky.vladislav.javanet;
 
 import org.korecky.vladislav.javanet.activations.ActivationFunction;
 
-public class NeuralNetwork {
-    private final Layer[] layers;
+public class NeuralNetwork implements Cloneable {
+    private Layer[] layers;
 
     /**
      * Create an empty neural network.
@@ -40,5 +40,27 @@ public class NeuralNetwork {
 
         // return the values of the last layer (a.k.a. the output layer)
         return layers[layers.length - 1].getValues();
+    }
+
+    @Override
+    public NeuralNetwork clone() {
+        NeuralNetwork clone;
+
+        try {
+            // make a shallow copy of the object (super.clone() -> Object.clone())
+            clone = (NeuralNetwork) super.clone();
+        } catch (CloneNotSupportedException e) {
+            // this will happen if the class doesn't implement Cloneable (a.k.a. never)
+            throw new AssertionError();
+        }
+
+        // make a deep copy of the neurons
+        clone.layers = new Layer[layers.length];
+
+        for (int i = 0; i < layers.length; i++) {
+            clone.layers[i] = layers[i].clone();
+        }
+
+        return clone;
     }
 }

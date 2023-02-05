@@ -2,7 +2,7 @@ package org.korecky.vladislav.javanet;
 
 import org.korecky.vladislav.javanet.activations.ActivationFunction;
 
-public class Neuron {
+public class Neuron implements Cloneable {
     private float value;
     private float[] weights;
     private float bias;
@@ -53,5 +53,23 @@ public class Neuron {
 
     public void setBias(float bias) {
         this.bias = bias;
+    }
+
+    @Override
+    public Neuron clone() {
+        Neuron clone;
+
+        try {
+            // make a shallow copy of the object (super.clone() -> Object.clone())
+            clone = (Neuron) super.clone();
+        } catch (CloneNotSupportedException e) {
+            // this will happen if the class doesn't implement Cloneable (a.k.a. never)
+            throw new AssertionError();
+        }
+
+        // clone all non-primitives
+        clone.weights = weights.clone();
+
+        return clone;
     }
 }
