@@ -1,5 +1,4 @@
-package org.korecky.vladislav.javanet;
-
+import org.korecky.vladislav.javanet.NeuralNetwork;
 import org.korecky.vladislav.javanet.activations.ActivationFunction;
 import org.korecky.vladislav.javanet.activations.LeakyRelu;
 import org.korecky.vladislav.javanet.activations.Linear;
