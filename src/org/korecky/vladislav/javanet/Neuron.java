@@ -78,10 +78,15 @@ public class Neuron implements Cloneable {
     }
 
     public void adjust(float maxChange) {
-        float maxChangePerWeight = maxChange / weights.length;
+        // note: the +1 is for the bias
+        float maxChangePerParameter = maxChange / (weights.length + 1);
 
+        // adjust weights
         for (int i = 0; i < weights.length; i++) {
-            weights[i] += rand.nextFloat(-maxChange, maxChange);
+            weights[i] += rand.nextFloat(-maxChangePerParameter, maxChangePerParameter);
         }
+
+        // adjust the bias
+        bias += rand.nextFloat(-maxChangePerParameter, maxChangePerParameter);
     }
 }
