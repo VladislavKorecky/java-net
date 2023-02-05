@@ -2,10 +2,14 @@ package org.korecky.vladislav.javanet;
 
 import org.korecky.vladislav.javanet.activations.ActivationFunction;
 
+import java.util.Random;
+
 public class Neuron implements Cloneable {
     private float value;
     private float[] weights;
     private float bias;
+
+    private static final Random rand = new Random();
 
     public Neuron(int inputSize) {
         this.value = bias;
@@ -71,5 +75,13 @@ public class Neuron implements Cloneable {
         clone.weights = weights.clone();
 
         return clone;
+    }
+
+    public void adjust(float maxChange) {
+        float maxChangePerWeight = maxChange / weights.length;
+
+        for (int i = 0; i < weights.length; i++) {
+            weights[i] += rand.nextFloat(-maxChange, maxChange);
+        }
     }
 }

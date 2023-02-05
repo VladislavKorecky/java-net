@@ -60,6 +60,14 @@ public class Layer implements Cloneable {
         return clone;
     }
 
+    public void adjust(float maxChange) {
+        float maxChangePerNeuron = maxChange / neurons.length;
+
+        for (Neuron neuron : neurons) {
+            neuron.adjust(maxChangePerNeuron);
+        }
+    }
+
     public Neuron[] getNeurons() {
         return neurons;
     }

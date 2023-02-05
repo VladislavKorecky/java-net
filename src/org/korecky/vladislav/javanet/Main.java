@@ -12,6 +12,7 @@ public class Main {
                 new int[]{2, 2, 1}, new ActivationFunction[]{null, new LeakyRelu(), new Linear()}
         );
         NeuralNetwork net2 = net.clone();
-        System.out.println(net != net2);
+        net2.adjust(100);
+        System.out.println();
     }
 }

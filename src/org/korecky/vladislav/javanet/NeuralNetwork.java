@@ -2,8 +2,11 @@ package org.korecky.vladislav.javanet;
 
 import org.korecky.vladislav.javanet.activations.ActivationFunction;
 
+import java.util.Arrays;
+
 public class NeuralNetwork implements Cloneable {
     private Layer[] layers;
+    private final int[] topology;
 
     /**
      * Create an empty neural network.
@@ -14,6 +17,8 @@ public class NeuralNetwork implements Cloneable {
         if (topology.length != activations.length) {
             throw new IllegalArgumentException("The length of topology and activations must be the same.");
         }
+
+        this.topology = topology;
 
         layers = new Layer[topology.length];
 
@@ -62,5 +67,13 @@ public class NeuralNetwork implements Cloneable {
         }
 
         return clone;
+    }
+
+    public void adjust(float maxChange) {
+        float maxChangePerLayer = maxChange / layers.length;
+
+        for (Layer layer : layers) {
+            layer.adjust(maxChangePerLayer);
+        }
     }
 }
