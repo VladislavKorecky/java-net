@@ -1,12 +1,10 @@
 package org.korecky.vladislav.javanet;
 
-
 import org.korecky.vladislav.javanet.activations.ActivationFunction;
 import org.korecky.vladislav.javanet.activations.LeakyRelu;
 import org.korecky.vladislav.javanet.activations.Linear;
 
-
-public class Main {
+public class XORTraining {
     public static float getError(NeuralNetwork net, float[][] dataset, float[] labelset) {
         float error = 0;
 
@@ -42,7 +40,7 @@ public class Main {
         NeuralNetwork net = new NeuralNetwork(
                 new int[]{2, 2, 1}, new ActivationFunction[]{null, new LeakyRelu(), new Linear()}
         );
-        float error = Main.getError(net, dataset, labelset);
+        float error = XORTraining.getError(net, dataset, labelset);
 
 
 
@@ -50,7 +48,7 @@ public class Main {
             NeuralNetwork netCopy = net.clone();
             netCopy.adjust(10f);
 
-            float newError = Main.getError(netCopy, dataset, labelset);
+            float newError = XORTraining.getError(netCopy, dataset, labelset);
 
             if (newError < error) {
                 net = netCopy;
